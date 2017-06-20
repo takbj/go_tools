@@ -125,7 +125,6 @@ var traceMode_started uint32
 func Start(options ...func(*Profile)) interface {
 	Stop()
 } {
-
 	var prof Profile
 	for _, option := range options {
 		option(&prof)
@@ -228,7 +227,6 @@ func Start(options ...func(*Profile)) interface {
 			logf("profile: trace disabled, %s", fn)
 		}
 	}
-
 	if !prof.noShutdownHook {
 		go func() {
 			c := make(chan os.Signal, 1)
@@ -237,10 +235,8 @@ func Start(options ...func(*Profile)) interface {
 
 			log.Println("profile: caught interrupt, stopping profiles")
 			prof.Stop()
-
-			os.Exit(0)
+			//			os.Exit(0)
 		}()
 	}
-
 	return &prof
 }
